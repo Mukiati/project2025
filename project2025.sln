@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "project2025", "project2025\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE811D4E-96BD-45CA-A7D0-D5AA4309DEA7}"
 	ProjectSection(SolutionItems) = preProject
+		database.cs = database.cs
 		user.cs = user.cs
 	EndProjectSection
 EndProject

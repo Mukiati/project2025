@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace project2025
 {
     /// <summary>
@@ -34,15 +35,12 @@ namespace project2025
                     MessageBox.Show("Sikeres bejelentkezés");
                     Window1 win1 = new Window1();
                     win1.Show();
-                    
-                    
-                    
                 }
                 else if (textbox1.Text != "levi" || textbox1.Text != "levi")
                 {
                     MessageBox.Show("Felhasznalónév vagy jelszó  helytelen ");
                 }
-                
+
             };
             button2.Click += (s, e) =>
             {

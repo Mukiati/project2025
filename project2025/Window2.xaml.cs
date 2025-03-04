@@ -34,7 +34,7 @@ namespace project2025
             {
                 HttpResponseMessage response = await client.GetAsync(url);
                 string stringResponse = await response.Content.ReadAsStringAsync();
-                
+                List<Users> users = JsonConvert.DeserializeObject<List<Users>>(stringResponse);
             }
             catch (Exception)
             {
@@ -45,14 +45,16 @@ namespace project2025
         async void Adduser(object s, EventArgs e)
         {
             HttpClient client = new HttpClient();
-            string url = "http://127.1.1.1:4444/alma";
+            string url = "http://127.1.1.1:4444/registerRequest";
             try
             {
                 var jsonObject = new
                 {
                     username = textbox1.Text,
                     password = textbox2.Text,
-                    email = textbox3.Text
+                    email = textbox3.Text,
+                    points = 0
+                   
                 };
 
                 string jsonData = JsonConvert.SerializeObject(jsonObject);
