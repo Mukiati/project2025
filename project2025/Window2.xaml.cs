@@ -26,50 +26,44 @@ namespace project2025
             InitializeComponent();
             createuser();
         }
-        async void createuser()
+         void createuser()
         {
-            HttpClient client = new HttpClient();
-            string url = "http://127.0.0.1:5555/registerRequest";
-            try
+            button1.Click += async (s, e) =>
             {
-                HttpResponseMessage response = await client.GetAsync(url);
-                string stringResponse = await response.Content.ReadAsStringAsync();
-                List<Users> users = JsonConvert.DeserializeObject<List<Users>>(stringResponse);
-            }
-            catch (Exception)
-            {
+                string username = textbox1.Text;
+                string password = textbox2.Text;
+                HttpClient client = new HttpClient();
+                string url = "http://localhost:3000/register";
 
-                throw;
-            }
-        }
-        async void Adduser(object s, EventArgs e)
-        {
-            HttpClient client = new HttpClient();
-            string url = "http://127.1.1.1:4444/registerRequest";
-            try
-            {
-                var jsonObject = new
+                try
                 {
-                    username = textbox1.Text,
-                    password = textbox2.Text,
-                    email = textbox3.Text,
-                    points = 0
-                   
-                };
+                    var jsonObject = new
+                    {
+                        name = textbox1.Text,
+                        password = textbox2.Text
+                    };
 
-                string jsonData = JsonConvert.SerializeObject(jsonObject);
-                StringContent data = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    string jsonData = JsonConvert.SerializeObject(jsonObject);
+                    StringContent data = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync(url, data);
+                    string stringResponse = await response.Content.ReadAsStringAsync();
+                    dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+                    if (jsonResponse.message == "sikertelen regisztráció")
+                    {
+                        MessageBox.Show("Sikertelen regisztrácio");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sikeres regisztrácio");
+                    }
+                }
+                catch (Exception error)
+                {
 
-                HttpResponseMessage response = await client.PostAsync(url, data);
-                response.EnsureSuccessStatusCode();
-                createuser();
-            }
-            catch (Exception error)
-            {
-
-                MessageBox.Show(error.Message);
-            }
-            //MessageBox.Show($"Alma neve: {nev.Text} , Alma ára: {ar.Text}");
+                    MessageBox.Show(error.Message);
+                }
+            };
         }
+        
     }
 }

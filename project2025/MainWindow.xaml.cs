@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace project2025
 {
@@ -26,22 +22,53 @@ namespace project2025
             InitializeComponent();
             start();
         }
+
         void start()
         {
-            button1.Click += (s, e) =>
+            button1.Click += async (s, e) =>
             {
-                if (textbox1.Text == "levi" && textbox2.Text == "cigany")
-                {
-                    MessageBox.Show("Sikeres bejelentkezés");
-                    Window1 win1 = new Window1();
-                    win1.Show();
-                }
-                else if (textbox1.Text != "levi" || textbox1.Text != "levi")
-                {
-                    MessageBox.Show("Felhasznalónév vagy jelszó  helytelen ");
-                }
+                string username = textbox1.Text;
+                string password = textbox2.Text;
+                HttpClient client = new HttpClient();
+                string url = "http://localhost:3000/login"; 
 
+                try
+                {
+                    var jsonObject = new
+                    {
+                        name = textbox1.Text,
+                        password = textbox2.Text
+                    };
+
+                    string jsonData = JsonConvert.SerializeObject(jsonObject);
+                    StringContent data = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync(url, data);
+                    string stringResponse = await response.Content.ReadAsStringAsync();
+
+                    
+                    dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+
+                    
+                    if (jsonResponse.message == "sikeres bejelentkezés")
+                    
+                    {
+                        MessageBox.Show("Sikeres bejelentkezés!");
+                        Window1 win1 = new Window1();
+                        win1.Title = textbox1.Text;
+                        win1.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Felhasználó vagy jelszó helytelen");
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show($"Hiba történt: {error.Message}");
+                    Console.WriteLine(error.Message);
+                }
             };
+
             button2.Click += (s, e) =>
             {
                 Window2 win2 = new Window2();
@@ -49,4 +76,7 @@ namespace project2025
             };
         }
     }
+
+    
+    
 }

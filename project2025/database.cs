@@ -70,7 +70,7 @@ namespace project2025
             try
             {
                 connection.Open();
-                string query = $"insert into auto (make, model, year, power) values('{oneuser.make}','{oneuser.model}',{oneuser.year},{oneuser.power})";
+                string query = $"insert into auto (make, model, year, power) values('{oneuser.username}','{oneuser.password}',{oneuser.email},{oneuser.points})";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
                 command.Dispose();
@@ -86,7 +86,7 @@ namespace project2025
     {
         public string username { get; set; }
         public string password { get; set; }
-        public String email { get; set; }
+        public string email { get; set; }
         public int points { get; set; }
     }
 }

@@ -36,15 +36,14 @@
 
         <TextBox HorizontalAlignment="Center" Height="23"  VerticalAlignment="Center" Width="120" Grid.Row="0" Grid.Column="1" Name="textbox1"/>
         <TextBox HorizontalAlignment="Center" Height="23"  VerticalAlignment="Center" Width="120" Grid.Row="1" Grid.Column="1" Name="textbox2"/>
-        <TextBox HorizontalAlignment="Center" Height="23"  VerticalAlignment="Center" Width="120" Grid.Row="2" Grid.Column="1" Name="textbox3"/>
+     
         <TextBlock HorizontalAlignment="Center" Height="23" Text="Felhasználónév :" VerticalAlignment="Center" Width="120" Grid.Row="0"   Background="DimGray" Foreground="White"/>
         <TextBlock HorizontalAlignment="Center" Height="23" Text="Jelszó :" VerticalAlignment="Center" Width="120" Grid.Row="1"  Background="DimGray" Foreground="White"></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="23" Text="Email :" VerticalAlignment="Center" Width="120" Grid.Row="2"  Background="DimGray" Foreground="White"></TextBlock>
+       
 
 
 
-
-        <Button Content="Regisztrálás" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="172" Height="137" Grid.Row="3" Grid.ColumnSpan="2"/>
+        <Button Content="Regisztrálás" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="172" Height="137" Grid.Row="3" Grid.ColumnSpan="2" Name="button1"/>
 
     </Grid>
 </Window>
