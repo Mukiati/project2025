@@ -43,6 +43,7 @@ namespace project2025
         private void Timer_Tick(object sender, EventArgs e)
         {
             scoree++;
+            score.Text = "Pontok: " + scoree;
         }
     }
 }
