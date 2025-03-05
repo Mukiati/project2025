@@ -7,7 +7,29 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Height="216" Margin="122,103,0,0" VerticalAlignment="Top" Width="539"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="3" Grid.ColumnSpan="3" Width="792" Height="104" Background="ForestGreen"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="2" Width="100" Height="52" Background="Red" Grid.Column="2" Margin="0,27,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="264" Height="104" Background="Yellow" Grid.Column="2" Margin="0,1,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="2" Width="103" Height="40" Background="Black" Margin="42,35,0,0" RenderTransformOrigin="0.5,0.5" Name="charatcter" KeyDown="charatcter_KeyDown">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.176"/>
+                    <RotateTransform Angle="90.803"/>
+                    <TranslateTransform X="-0.002" Y="0.134"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
     </Grid>
 </Window>

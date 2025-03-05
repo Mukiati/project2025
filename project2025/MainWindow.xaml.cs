@@ -64,11 +64,10 @@ namespace project2025
                 }
                 catch (Exception error)
                 {
-                    MessageBox.Show($"Hiba történt: {error.Message}");
-                    Console.WriteLine(error.Message);
+                    MessageBox.Show(error.Message);
+                    
                 }
             };
-
             button2.Click += (s, e) =>
             {
                 Window2 win2 = new Window2();

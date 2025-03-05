@@ -23,5 +23,18 @@ namespace project2025
         {
             InitializeComponent();
         }
+        void movement()
+        {
+           
+            if ()
+            {
+                
+            }
+        }
+
+        private void charatcter_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
