@@ -11,30 +11,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace project2025
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class Window1 : Window
     {
         public Window1()
         {
             InitializeComponent();
         }
-        void movement()
-        {
-           
-            if ()
-            {
-                
-            }
-        }
 
-        private void charatcter_KeyDown(object sender, KeyEventArgs e)
-        {
+       
 
-        }
     }
 }
+

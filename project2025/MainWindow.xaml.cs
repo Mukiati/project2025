@@ -68,6 +68,7 @@ namespace project2025
                     
                 }
             };
+
             button2.Click += (s, e) =>
             {
                 Window2 win2 = new Window2();
