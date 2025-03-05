@@ -30,7 +30,7 @@ namespace project2025
                 string username = textbox1.Text;
                 string password = textbox2.Text;
                 HttpClient client = new HttpClient();
-                string url = "http://localhost:3000/login"; 
+                string url = "http://localhost:3000/login";
 
                 try
                 {
@@ -45,12 +45,12 @@ namespace project2025
                     HttpResponseMessage response = await client.PostAsync(url, data);
                     string stringResponse = await response.Content.ReadAsStringAsync();
 
-                    
+
                     dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
 
-                    
+
                     if (jsonResponse.message == "sikeres bejelentkezés")
-                    
+
                     {
                         MessageBox.Show("Sikeres bejelentkezés!");
                         Window1 win1 = new Window1();
@@ -64,8 +64,8 @@ namespace project2025
                 }
                 catch (Exception error)
                 {
-                    MessageBox.Show(error.Message);
-                    
+                    MessageBox.Show($"Hiba történt: {error.Message}");
+                    Console.WriteLine(error.Message);
                 }
             };
 
@@ -77,6 +77,6 @@ namespace project2025
         }
     }
 
-    
-    
+
+
 }
