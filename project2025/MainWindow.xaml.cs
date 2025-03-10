@@ -27,34 +27,44 @@ namespace project2025
         {
             button1.Click += async (s, e) =>
             {
-                string username = textbox1.Text;
-                string password = textbox2.Text;
+                string name = textbox1.Text;
+                string passw = textbox2.Text;
                 HttpClient client = new HttpClient();
                 string url = "http://localhost:5555/login";
 
                 try
                 {
+                    
                     var jsonObject = new
                     {
-                        username = textbox1.Text,
-                        password = textbox2.Text
+                        username = name,
+                        password = passw
                     };
 
                     string jsonData = JsonConvert.SerializeObject(jsonObject);
                     StringContent data = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync(url, data);
-                    string stringResponse = await response.Content.ReadAsStringAsync();
 
+                   
+                    HttpResponseMessage response = await client.PostAsync(url, data);
+
+                    
+                    
+
+                    
+                    
+
+                    string stringResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(stringResponse);  // Nyomtasd ki a válasz teljes tartalmát
 
                     dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
 
 
-                    if (response.IsSuccessStatusCode && jsonResponse.message == "sikeres bejelentkezés")
 
+                    if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Sikeres bejelentkezés!");
                         Form1 form1 = new Form1();
-                        form1.Text = textbox1.Text;
+                        form1.Text = name;
                         form1.Show();
                     }
                     else
@@ -68,6 +78,8 @@ namespace project2025
                     Console.WriteLine(error.Message);
                 }
             };
+
+
 
             button2.Click += (s, e) =>
             {

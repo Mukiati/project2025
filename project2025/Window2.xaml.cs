@@ -30,8 +30,8 @@ namespace project2025
         {
             button1.Click += async (s, e) =>
             {
-                string username = textbox1.Text;
-                string password = textbox2.Text;
+                string name = textbox1.Text;
+                string passw = textbox2.Text;
                 HttpClient client = new HttpClient();
                 string url = "http://localhost:5555/register";
 
@@ -39,8 +39,8 @@ namespace project2025
                 {
                     var jsonObject = new
                     {
-                        username = textbox1.Text,
-                        password = textbox2.Text
+                        username = name,
+                        password = passw
                     };
                     if (textbox1.Text != "" && textbox2.Text != "")
                     {
@@ -49,14 +49,14 @@ namespace project2025
                         HttpResponseMessage response = await client.PostAsync(url, data);
                         string stringResponse = await response.Content.ReadAsStringAsync();
                         dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
-                        if (response.IsSuccessStatusCode && jsonResponse.message == "sikeres regisztráció")
+                        if (response.IsSuccessStatusCode)
                         {
                             MessageBox.Show("Sikeres regisztrácio");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Felhasználó n év vagy jelszó hiányos");
+                        MessageBox.Show("Felhasználónév vagy jelszó hiányos");
                     }
 
                     
