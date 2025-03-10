@@ -30,13 +30,13 @@ namespace project2025
                 string username = textbox1.Text;
                 string password = textbox2.Text;
                 HttpClient client = new HttpClient();
-                string url = "http://localhost:3000/login";
+                string url = "http://localhost:5555/login";
 
                 try
                 {
                     var jsonObject = new
                     {
-                        name = textbox1.Text,
+                        username = textbox1.Text,
                         password = textbox2.Text
                     };
 
@@ -49,13 +49,13 @@ namespace project2025
                     dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
 
 
-                    if (jsonResponse.message == "sikeres bejelentkezés")
+                    if (response.IsSuccessStatusCode && jsonResponse.message == "sikeres bejelentkezés")
 
                     {
                         MessageBox.Show("Sikeres bejelentkezés!");
-                        Window1 win1 = new Window1();
-                        win1.Title = textbox1.Text;
-                        win1.Show();
+                        Form1 form1 = new Form1();
+                        form1.Text = textbox1.Text;
+                        form1.Show();
                     }
                     else
                     {

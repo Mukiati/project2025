@@ -33,13 +33,13 @@ namespace project2025
                 string username = textbox1.Text;
                 string password = textbox2.Text;
                 HttpClient client = new HttpClient();
-                string url = "http://localhost:3000/register";
+                string url = "http://localhost:5555/register";
 
                 try
                 {
                     var jsonObject = new
                     {
-                        name = textbox1.Text,
+                        username = textbox1.Text,
                         password = textbox2.Text
                     };
                     if (textbox1.Text != "" && textbox2.Text != "")
@@ -50,10 +50,6 @@ namespace project2025
                         string stringResponse = await response.Content.ReadAsStringAsync();
                         dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
                         if (response.IsSuccessStatusCode && jsonResponse.message == "sikeres regisztráció")
-                        {
-                            MessageBox.Show("Sikeres regisztrácio");
-                        }
-                        else
                         {
                             MessageBox.Show("Sikeres regisztrácio");
                         }
