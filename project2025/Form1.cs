@@ -12,15 +12,39 @@ namespace project2025
 {
     public partial class Form1 : Form
     {
+        gameMechanics gms;
         int scoree;
         public Form1()
         {
             InitializeComponent();
-            pointwrite();
+            gms = new gameMechanics(this);
+            StartGame();
         }
-        void pointwrite()
+        void StartGame()
         {
-            score.Text = "Pontok: " + scoree;
+            KeyPreview = true;
+            this.KeyDown += (s, e) => {
+                if (e.KeyCode == Keys.Space)
+                {
+                    gms.jump();
+
+                }
+                else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+                {
+                    gms.moveLeft();
+                    gms.moveLeft2();
+                }
+                else if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
+                {
+                    gms.moveRight();
+                    gms.moveRight2();
+                }
+            };
         }
+
+
+
+
+
     }
 }
