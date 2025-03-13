@@ -33,6 +33,7 @@ namespace project2025
                 {
                     gms.moveLeft();
                     gms.MoveLeft2Async();
+                    
                 }
                 else if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
                 {
@@ -40,7 +41,11 @@ namespace project2025
                     gms.MoveRight2Async();
                 }
             };
+            
+            
+
         }
+
 
 
 

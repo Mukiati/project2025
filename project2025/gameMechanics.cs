@@ -12,7 +12,7 @@ namespace project2025
     public class gameMechanics
     {
         Form1 data;
-        private static readonly HttpClient client = new HttpClient(); 
+        public  static readonly HttpClient client = new HttpClient(); 
         void gravity()
         {
             Timer fall = new Timer();
@@ -87,7 +87,7 @@ namespace project2025
                 MessageBox.Show("Meghaltál!");
             }
         }
-        public async Task MoveLeft2Async()
+        public async void  MoveLeft2Async()
         {
             if (!collision2())
             {
@@ -103,14 +103,37 @@ namespace project2025
                 var jsonObject = new
                 {
                     username = name,
-                    money = mone
+                    money = 1
                 };
 
-                await UpdateMoneyAsync(url, jsonObject); // Frissítjük a pénzt
+                try
+                {
+                    string jsonData = JsonConvert.SerializeObject(jsonObject);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PutAsync(url, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string stringResponse = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(stringResponse);
+                        // A válasz kezelése
+                        dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Hiba történt: {response.ReasonPhrase}");
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show($"Hiba történt: {error.Message}");
+                    Console.WriteLine(error.Message);
+                }
             }
         }
 
-        public async Task MoveRight2Async()
+        public async void MoveRight2Async()
         {
             if (!collision2())
             {
@@ -119,9 +142,9 @@ namespace project2025
             else
             {
                 MessageBox.Show("Akció");
-
-                string name = "user1"; // Ha nem változik, érdemes itt beállítani az értéket.
-                int mone = 1000;
+                string name = data.Text;
+                int mone = data.score;
+                MessageBox.Show(mone.ToString());
 
                 string url = "http://localhost:5555/updateM";
                 var jsonObject = new
@@ -129,38 +152,30 @@ namespace project2025
                     username = name,
                     money = mone
                 };
-
-                // Kérést küldünk a pénz frissítéséhez
-                await UpdateMoneyAsync(url, jsonObject);
-            }
-        }
-
-        // Aszinkron metódus, ami végrehajtja a pénz frissítését
-        private async Task UpdateMoneyAsync(string url, object jsonObject)
-        {
-            try
-            {
-                string jsonData = JsonConvert.SerializeObject(jsonObject);
-                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PutAsync(url, content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    string stringResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(stringResponse);
-                    // A válasz kezelése
-                    dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+                    string jsonData = JsonConvert.SerializeObject(jsonObject);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PutAsync(url, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string stringResponse = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(stringResponse);
+                        // A válasz kezelése
+                        dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Hiba történt: {response.ReasonPhrase}");
+                    }
                 }
-                else
+                catch (Exception error)
                 {
-                    MessageBox.Show($"Hiba történt: {response.ReasonPhrase}");
+                    MessageBox.Show($"Hiba történt: {error.Message}");
+                    Console.WriteLine(error.Message);
                 }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show($"Hiba történt: {error.Message}");
-                Console.WriteLine(error.Message);
             }
         }
 
