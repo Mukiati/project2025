@@ -13,7 +13,7 @@ namespace project2025
     public partial class Form1 : Form
     {
         gameMechanics gms;
-        int scoree;
+         public int scoree;
         public Form1()
         {
             InitializeComponent();
@@ -32,12 +32,12 @@ namespace project2025
                 else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
                 {
                     gms.moveLeft();
-                    gms.moveLeft2();
+                    gms.MoveLeft2Async();
                 }
                 else if (e.KeyCode == Keys.Right || e.KeyCode == Keys.D)
                 {
                     gms.moveRight();
-                    gms.moveRight2();
+                    gms.MoveRight2Async();
                 }
             };
         }

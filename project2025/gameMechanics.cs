@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace project2025
 {
     public class gameMechanics
     {
         Form1 data;
+        private static readonly HttpClient client = new HttpClient(); 
         void gravity()
         {
             Timer fall = new Timer();
@@ -72,7 +75,7 @@ namespace project2025
                 MessageBox.Show("Meghaltál!");
             }
         }
-        public void moveRight()
+        public  void moveRight()
         {
             if (!collision())
             {
@@ -84,7 +87,7 @@ namespace project2025
                 MessageBox.Show("Meghaltál!");
             }
         }
-        public void moveLeft2()
+        public async Task MoveLeft2Async()
         {
             if (!collision2())
             {
@@ -92,21 +95,75 @@ namespace project2025
             }
             else
             {
-                MessageBox.Show("akció");
+                MessageBox.Show("Akció");
+                string name = data.Text;
+                int mone = data.scoree;
+
+                string url = "http://localhost:5555/updateM";
+                var jsonObject = new
+                {
+                    username = name,
+                    money = mone
+                };
+
+                await UpdateMoneyAsync(url, jsonObject); // Frissítjük a pénzt
             }
         }
-        public void moveRight2()
+
+        public async Task MoveRight2Async()
         {
             if (!collision2())
             {
                 move(-0);
             }
-
             else
             {
-                MessageBox.Show("akció");
+                MessageBox.Show("Akció");
+
+                string name = "user1"; // Ha nem változik, érdemes itt beállítani az értéket.
+                int mone = 1000;
+
+                string url = "http://localhost:5555/updateM";
+                var jsonObject = new
+                {
+                    username = name,
+                    money = mone
+                };
+
+                // Kérést küldünk a pénz frissítéséhez
+                await UpdateMoneyAsync(url, jsonObject);
             }
         }
+
+        // Aszinkron metódus, ami végrehajtja a pénz frissítését
+        private async Task UpdateMoneyAsync(string url, object jsonObject)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(jsonObject);
+                StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string stringResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(stringResponse);
+                    // A válasz kezelése
+                    dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
+                }
+                else
+                {
+                    MessageBox.Show($"Hiba történt: {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show($"Hiba történt: {error.Message}");
+                Console.WriteLine(error.Message);
+            }
+        }
+
         void getScore()
         {
             int allScore = 0;
