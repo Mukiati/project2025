@@ -39,20 +39,12 @@ namespace project2025
 
         private void InitializeComponent()
         {
-            this.score = new System.Windows.Forms.TextBox();
             this.ground = new System.Windows.Forms.PictureBox();
             this.ch = new System.Windows.Forms.PictureBox();
+            this.score = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ground)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ch)).BeginInit();
             this.SuspendLayout();
-            // 
-            // score
-            // 
-            this.score.Enabled = false;
-            this.score.Location = new System.Drawing.Point(12, 12);
-            this.score.Name = "score";
-            this.score.Size = new System.Drawing.Size(100, 20);
-            this.score.TabIndex = 0;
             // 
             // ground
             // 
@@ -73,20 +65,28 @@ namespace project2025
             this.ch.TabIndex = 4;
             this.ch.TabStop = false;
             // 
+            // score
+            // 
+            this.score.Location = new System.Drawing.Point(12, 12);
+            this.score.Name = "score";
+            this.score.Size = new System.Drawing.Size(75, 23);
+            this.score.TabIndex = 5;
+            this.score.UseVisualStyleBackColor = true;
+            Enabled = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.score);
             this.Controls.Add(this.ch);
             this.Controls.Add(this.ground);
-            this.Controls.Add(this.score);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ch)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
         public void updateScore(int score)
@@ -108,9 +108,9 @@ namespace project2025
             heights[2] = this.Height - 250 - block.Height;
             block.Location = new Point(left, heights[r.Next(0, 3)]);
            
-            Image img = Image.FromFile("alap.png");
+           /*Image img = Image.FromFile("alap.png");
             block.BackgroundImage = img;
-            block.BackgroundImageLayout = ImageLayout.Center;
+            block.BackgroundImageLayout = ImageLayout.Center;*/
 
             blocks.Add(block);
             
@@ -119,7 +119,7 @@ namespace project2025
 
             PictureBox blockc = new PictureBox();
             Controls.Add(blockc);
-            //blockc.BackColor = Color.Red;
+            blockc.BackColor = Color.Yellow;
             blockc.Width = 50;
             blockc.Height = 50;
 
@@ -131,17 +131,16 @@ namespace project2025
             blockc.Location = new Point(leftt, heightss[r.Next(0, 3)]); 
 
 
-            Image imgg = Image.FromFile("asd3.png");
+            /*Image imgg = Image.FromFile("asd3.png");
             blockc.BackgroundImage = imgg;
             blockc.BackgroundImageLayout = ImageLayout.Center;
-            blockc.Size = blockc.BackgroundImage.Size;
+            blockc.Size = blockc.BackgroundImage.Size;*/
            
             blocks2.Add(blockc);
         }
         #endregion
-
-        public System.Windows.Forms.TextBox score;
         public System.Windows.Forms.PictureBox ground;
         public System.Windows.Forms.PictureBox ch;
+        public Button score;
     }
 }

@@ -13,7 +13,7 @@ namespace project2025
     public partial class Form1 : Form
     {
         gameMechanics gms;
-         public int scoree;
+         
         public Form1()
         {
             InitializeComponent();

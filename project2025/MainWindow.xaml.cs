@@ -44,17 +44,10 @@ namespace project2025
                     string jsonData = JsonConvert.SerializeObject(jsonObject);
                     StringContent data = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-                   
+
                     HttpResponseMessage response = await client.PostAsync(url, data);
-
-                    
-                    
-
-                    
-                    
-
                     string stringResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(stringResponse);  // Nyomtasd ki a válasz teljes tartalmát
+                    
 
                     dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
 
@@ -75,7 +68,7 @@ namespace project2025
                 catch (Exception error)
                 {
                     MessageBox.Show($"Hiba történt: {error.Message}");
-                    Console.WriteLine(error.Message);
+                    
                 }
             };
 

@@ -12,7 +12,8 @@ namespace project2025
     public class gameMechanics
     {
         Form1 data;
-        public  static readonly HttpClient client = new HttpClient(); 
+        public  static readonly HttpClient client = new HttpClient();
+        public int scoree;
         void gravity()
         {
             Timer fall = new Timer();
@@ -73,6 +74,7 @@ namespace project2025
             else
             {
                 MessageBox.Show("Meghaltál!");
+                Application.Exit();
             }
         }
         public  void moveRight()
@@ -85,6 +87,7 @@ namespace project2025
             else
             {
                 MessageBox.Show("Meghaltál!");
+                Application.Exit();
             }
         }
         public async void  MoveLeft2Async()
@@ -95,15 +98,17 @@ namespace project2025
             }
             else
             {
+               
                 MessageBox.Show("Akció");
                 string name = data.Text;
-                int mone = data.scoree;
+                int money = scoree;
 
-                string url = "http://localhost:5555/updateM";
+
+                string url = "http://localhost:5555/mupdate";
                 var jsonObject = new
                 {
                     username = name,
-                    money = 1
+                    money = money
                 };
 
                 try
@@ -116,19 +121,18 @@ namespace project2025
                     if (response.IsSuccessStatusCode)
                     {
                         string stringResponse = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(stringResponse);
-                        // A válasz kezelése
+                        
                         dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
                     }
                     else
                     {
-                        MessageBox.Show($"Hiba történt: {response.ReasonPhrase}");
+                        
                     }
                 }
                 catch (Exception error)
                 {
-                    MessageBox.Show($"Hiba történt: {error.Message}");
-                    Console.WriteLine(error.Message);
+                   
+                    
                 }
             }
         }
@@ -141,16 +145,17 @@ namespace project2025
             }
             else
             {
+                
                 MessageBox.Show("Akció");
                 string name = data.Text;
-                int mone = data.score;
-                MessageBox.Show(mone.ToString());
+                int money= scoree;
+                MessageBox.Show(money.ToString());
 
-                string url = "http://localhost:5555/updateM";
+                string url = "http://localhost:5555/mupdate";
                 var jsonObject = new
                 {
                     username = name,
-                    money = mone
+                    money = money
                 };
                 try
                 {
@@ -162,8 +167,7 @@ namespace project2025
                     if (response.IsSuccessStatusCode)
                     {
                         string stringResponse = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(stringResponse);
-                        // A válasz kezelése
+                        
                         dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(stringResponse);
                     }
                     else
@@ -174,7 +178,7 @@ namespace project2025
                 catch (Exception error)
                 {
                     MessageBox.Show($"Hiba történt: {error.Message}");
-                    Console.WriteLine(error.Message);
+                   
                 }
             }
         }
@@ -187,16 +191,21 @@ namespace project2025
                 if (item.Left < data.ch.Left)
                 {
                     allScore++;
+                    
                 }
             }
+
+            //scoree = allScore;
             data.updateScore(allScore);
+           
         }
         void move(int step)
         {
-            getScore();         
+            //getScore();         
             foreach (PictureBox item in data.blocks)
             {
                 item.Left += step;
+               
             }          
             if (!falling)
             {
@@ -377,6 +386,8 @@ namespace project2025
             {
                 if (data.ch.Bounds.IntersectsWith(item.Bounds))
                 {
+                    scoree++;
+                    data.score.Text = scoree.ToString();
                     return true;
                 }
             }
